@@ -29,7 +29,7 @@ variable "repo_secrets" {
     "one" = {
       repo_name = "greetings-app"
       secret_name = "GRANTTYPECONNECTEDAPP"
-      secret_value = "zuCnmyhZFJXgAQtRHU/k1YFlsoxxm3Ozbsb79PkNfkiwswMt1npZxQf22RxZIDVPXQ0nGdLt2CPGObGOgzrYsA9p/8ZeiMDJYbZae3Y6pec="
+      secret_value = "VTw2lrNd4JgQpY1Y6I6302evDFEyPcHmOtBb9oYe5zGLPA2R3p1AzIqOg+80HKmZUAf2FOKL3A8M0fFzXrdP0E0M"
     }
     "two" = {
       repo_name = "greetings-app"
