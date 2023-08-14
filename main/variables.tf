@@ -44,6 +44,7 @@ variable "repo_secrets" {
   }
 }
 
+/*
 variable "org_variables" {
   type = map (object({
     variable_name = string
@@ -80,4 +81,4 @@ variable "repo_variables" {
         variable_value = "132465789"
       }
     }
-}
+}*/
