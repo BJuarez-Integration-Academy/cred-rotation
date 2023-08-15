@@ -4,6 +4,7 @@ on: [push, pull_request, workflow_dispatch]
 
 env:
   TF_LOG: INFO
+  passphraseFile: ${{ secrets.FILE_PASS_PHRASE }}
   GITHUB_OWNER: ${{ secrets.GIT_OWNER }}
   GITHUB_TOKEN: ${{ secrets.GIT_PAT }}
 
@@ -23,6 +24,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Decrypt and read file
+      run: gpg --quiet --batch --yes --decrypt --passphrase="$passphraseFile" --output $HOME/terraformValues.tfvars terraformValues.tfvars.gpg
+
     # Install Terraform CLI 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
@@ -40,8 +44,8 @@ jobs:
     # Run a terraform plan
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color
+      run: terraform plan -var-file=$HOME/terraformValues.tfvars -no-color
     
     # Terraform Apply
     - name: Terraform Apply
-      run: terraform apply -auto-approve
+      run: terraform apply -var-file=$HOME/terraformValues.tfvars -auto-approve
