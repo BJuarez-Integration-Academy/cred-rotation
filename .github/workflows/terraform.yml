@@ -9,6 +9,8 @@ env:
   GITHUB_TOKEN: ${{ secrets.GIT_PAT }}
 
 jobs:
+  call-workflow-using-branch:
+    uses: BJuarez-Integration-Academy/greetings-app/.github/workflows/main.yml@dev
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
@@ -49,6 +51,3 @@ jobs:
     # Terraform Apply
     - name: Terraform Apply
       run: terraform apply -var-file=$HOME/terraformValues.tfvars -auto-approve
-      
-    - name: Calling another workflow
-      uses: BJuarez-Integration-Academy/greetings-app/.github/workflows/main.yml@dev
