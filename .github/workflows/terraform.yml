@@ -4,9 +4,9 @@ on: [push, pull_request, workflow_dispatch]
 
 env:
   TF_LOG: INFO
-  passphraseFile: ${{ secrets.FILE_PASS_PHRASE }}
-  GITHUB_OWNER: ${{ secrets.GIT_OWNER }}
-  GITHUB_TOKEN: ${{ secrets.GIT_PAT }}
+  passphraseFile: ${{ secrets.POC_FILE_PASS_PHRASE }}
+  GITHUB_OWNER: ${{ secrets.POC_GIT_OWNER }}
+  GITHUB_TOKEN: ${{ secrets.POC_GIT_PAT }}
 
 jobs:
   terraform:
