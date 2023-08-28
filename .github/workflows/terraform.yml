@@ -25,7 +25,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Decrypt and read file
-      run: gpg --quiet --batch --yes --decrypt --passphrase="$passphraseFile" --output $HOME/terraformValues.tfvars terraformValues.tfvars.gpg
+      run: gpg --quiet --batch --yes --decrypt --passphrase="$passphraseFile" --use-embedded-filename *.json.gpg
 
     # Install Terraform CLI 
     - name: Setup Terraform
@@ -44,8 +44,8 @@ jobs:
     # Run a terraform plan
     - name: Terraform Plan
       id: plan
-      run: terraform plan -var-file=$HOME/terraformValues.tfvars -no-color
+      run: terraform plan -compact-warnings -no-color
     
     # Terraform Apply
     - name: Terraform Apply
-      run: terraform apply -var-file=$HOME/terraformValues.tfvars -auto-approve
+      run: terraform apply -compact-warnings -auto-approve
