@@ -49,3 +49,17 @@ jobs:
     # Terraform Apply
     - name: Terraform Apply
       run: terraform apply -compact-warnings -auto-approve
+
+      #Executting python script to trigger workflows
+    - name: setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11.4' # install the python version needed
+    
+    - name: install python packages
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: execute py script # run main.py
+      run: python main.py
