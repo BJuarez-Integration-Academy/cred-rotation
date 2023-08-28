@@ -7,6 +7,7 @@ env:
   passphraseFile: ${{ secrets.POC_FILE_PASS_PHRASE }}
   GITHUB_OWNER: ${{ secrets.POC_GIT_OWNER }}
   GITHUB_TOKEN: ${{ secrets.POC_GIT_PAT }}
+  GITHUB_ROOT_DIR: ${{ github.workspace }}
 
 jobs:
   terraform:
@@ -61,5 +62,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
+    - name: execute pwd command
+      run: pwd
+      
     - name: execute py script # run main.py
       run: python main.py

@@ -2,6 +2,7 @@ import json,os,glob
 import localModule as lm
 
 rpath = os.environ['GITHUB_ROOT_DIR']
+print("GITHUB_ROOT_DIR: " + rpath)
 
 #Getting the .json file name
 files = glob.glob("*.json")

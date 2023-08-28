@@ -1,7 +1,7 @@
 import json, os,requests
 
-personalAccessToken = os.environ['POC_GIT_PAT']
-ORG_NAME = os.environ['POC_GIT_OWNER']
+personalAccessToken = os.environ['GITHUB_TOKEN']
+ORG_NAME = os.environ['GITHUB_OWNER']
 
 ################################-Initializing global vars-##############################################
 token = "Bearer " + personalAccessToken
