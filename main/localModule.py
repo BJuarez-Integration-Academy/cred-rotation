@@ -27,3 +27,22 @@ def triggerWorkflow(repoName: str,env:str):
             print("====> Status: Wf Triggered Successfully")
         else: print("Error while triggering the workflow from repo: "+ repoName)
     else: print("Error while getting workflow ID from repo: "+ repoName)
+    
+#################################-Deleting file from a REPO Function-#################################
+def deleteFileFromRepo(repoName:str,branchName:str):
+    url = "https://api.github.com/repos/"+ORG_NAME+"/"+repoName+"/contents/main?ref="+branchName
+    print("url: "+url)
+    
+    getResp = requests.get(url, headers = header)
+    if getResp.status_code == 200:
+        print("===>Listng the content of ["+repoName+ "] repo")
+        getResp = json.loads(getResp.text)
+        respoContent = [content for content in getResp if str(content['name']).endswith(".json.pgp")]
+        print("Filtered content:")
+        print(respoContent)
+    else:
+        print("Error when listing the content of the repo: "+repoName)
+        print(getResp.text)
+        
+        
+        

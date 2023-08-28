@@ -17,7 +17,8 @@ print("Processing [" +files[0]+"] file")
 #Reading decrypted file
 with open(rpath + "/main/"+files[0]) as f:
     payload = json.load(f)
-        
+
 #Triggering git actions workflows
 for repo in payload['reposToTrigger']:
-    lm.triggerWorkflow(repo,env)
+    lm.deleteFileFromRepo(repo,env)
+    #lm.triggerWorkflow(repo,env)
