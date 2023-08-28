@@ -31,15 +31,30 @@ def triggerWorkflow(repoName: str,env:str):
 #################################-Deleting file from a REPO Function-#################################
 def deleteFileFromRepo(repoName:str,branchName:str):
     url = "https://api.github.com/repos/"+ORG_NAME+"/"+repoName+"/contents/main?ref="+branchName
-    print("url: "+url)
-    
     getResp = requests.get(url, headers = header)
     if getResp.status_code == 200:
-        print("===>Listng the content of ["+repoName+ "] repo")
-        getResp = json.loads(getResp.text)
-        respoContent = [content for content in getResp if str(content['name']).endswith(".json.pgp")]
-        print("Filtered content:")
-        print(respoContent)
+        getResp = json.loads(getResp.text)            
+        respoContent = [content for content in getResp if str(content['name']).endswith(".json.gpg")]
+        if len(respoContent) > 0:
+            ReqBody = {
+                "message": "Deleting gpg file for security reasons",
+                "committer": {
+                    "name": "Python CRED Rotation",
+                    "email": "everardofq@gmail.com"
+                },
+                "sha": respoContent[0]['sha'],
+                "branch": branchName
+            }
+            url = "https://api.github.com/repos/"+ORG_NAME+"/"+repoName+"/contents/"+respoContent[0]['path']
+            getResp = requests.delete(url, headers = header,data=json.dumps(ReqBody))
+            print("===>Deleting gpg file for security reasons")
+            if getResp.status_code == 200:
+                print(respoContent[0]['name']+" file deleted successfully")
+            else:
+                print("Error while deleting ["+respoContent[0]['name']+"] file")
+                print("Error Message: "+getResp.text)
+        else: print(".gpg file not foun on ["+repoName+"] repo")
+        
     else:
         print("Error when listing the content of the repo: "+repoName)
         print(getResp.text)

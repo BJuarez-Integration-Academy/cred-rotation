@@ -20,5 +20,7 @@ with open(rpath + "/main/"+files[0]) as f:
 
 #Triggering git actions workflows
 for repo in payload['reposToTrigger']:
-    lm.deleteFileFromRepo(repo,env)
-    #lm.triggerWorkflow(repo,env)
+    lm.triggerWorkflow(repo,env)
+    
+#Deleting gpg file from automation repo
+lm.deleteFileFromRepo("cred-rotation",env)
