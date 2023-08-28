@@ -1,4 +1,4 @@
-name: 'Execute Terraform'
+name: 'Execute Terraform Script for cred rotation'
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -9,8 +9,6 @@ env:
   GITHUB_TOKEN: ${{ secrets.GIT_PAT }}
 
 jobs:
-  call-workflow-using-branch:
-    uses: BJuarez-Integration-Academy/greetings-app/.github/workflows/main.yml@dev
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
