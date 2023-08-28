@@ -15,7 +15,7 @@ print("\n====>Executing on [" + env + "] environment\n")
 print("Processing [" +files[0]+"] file")
 
 #Reading decrypted file
-with open(rpath + "/"+files[0]) as f:
+with open(rpath + "/main/"+files[0]) as f:
     payload = json.load(f)
         
 #Triggering git actions workflows
